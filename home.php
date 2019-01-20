@@ -5,6 +5,20 @@ if(!isset($_SESSION['email'])){
 	header("Location:index.php");
 }
 ?>
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "myimprint";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+$query="SELECT * FROM jobs order by time desc";
+if( $query_run = mysqli_query($conn, $query) ){
+  $jobs = mysqli_fetch_assoc($query_run);
+  print_r($jobs);
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +42,7 @@ if(!isset($_SESSION['email'])){
 		</a>
 	</div>
 	<div class="container">
+		<p class="menuheading animated">Job offers for you</p>
 		<div class="row">
 			<div class="col s10 offset-s1">
 				<div class="card hoverable">
@@ -42,6 +57,7 @@ if(!isset($_SESSION['email'])){
 											<th>Duration</th>
 											<th>Stipend</th>
 											<th>Posted on</th>
+											<th>Apply By</th>
 										</tr>
 									</thead>
 
@@ -51,6 +67,7 @@ if(!isset($_SESSION['email'])){
 											<td>Eclair</td>
 											<td>$0.87</td>
 											<td>rfd</td>
+											<td>rgfd</td>
 										</tr>
 									</tbody>
 								</table>
@@ -68,6 +85,27 @@ if(!isset($_SESSION['email'])){
 		</div>
 	</div>
 </body>
+<!-- Modal -->
+<div id="modal" class="modal">
+  <span style="float: right; cursor: pointer;"><i class="material-icons modal-action modal-close" style="font-size: 30px; margin-right: 5px;">&times</i></span>
+  <div class="modal-content">
+    <h4 class="menuheading animated">Apply</h4>
+   	<form action="applied.php" method="post">
+   		<div class="row">
+   			<div class="s12">
+   				<h6 style="font-weight: bold">Job Description:</h6>
+   				<p style="font-size: 100%; margin-top: 0">70% of Class of 2014 voted for the gift in various categories and close to 350 students contributed their caution money.<br>
+       Class of 2014 voted to support International Participation of students.</p>
+       <h6 style="font-weight: bold">Who can apply?</h6>
+   				<p style="font-size: 100%; margin-top: 0">70% of Class of 2014 voted for the gift in various categories and close to 350 students contributed their caution money.<br>
+       Class of 2014 voted to support International Participation of students.</p>
+   			</div>
+   		</div>
+   	</form>
+    
+  </div>
+</div>
+
 </html>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="js/materialize.js"></script>
@@ -89,4 +127,7 @@ if(!isset($_SESSION['email'])){
 			}
 		});
 	});
-// </script>
+	$(document).ready(function() {
+		$('.modal-trigger').leanModal();
+  });
+ </script>

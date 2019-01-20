@@ -66,7 +66,7 @@ body{overflow-x: hidden;}
      It is a class-based effort directed towards raising unrestricted funds from students of graduating batch. A part of the collected fund is used for Senior Class Gift while the rest goes towards Endowment. The Endowment would again be utilized for students' services only. It is an opportunity for graduating students to take their first step in being soon-to-be alumni by making their Graduating Class Gift, the gift which impacts student life in the KGP campus. This challenge offers seniors the chance not only to make a gift, but also to leave behind their imprint.
    </p>
  </div>
- 
+
  <div class="scrollspy" id="classgift">
   <p class="menuheading animated">PREVIOUS CLASS GIFTS</p>
   <div class="container">
@@ -281,12 +281,19 @@ body{overflow-x: hidden;}
           <input name="stipend" id="stipend" type="text" placeholder="Rs. /month" required>
           <label for="stipend">Stipend</label>
         </div>
-        
+        <div class="input-field col s12 l5 m6">
+          <input name="applyby" id="apply" type="date" required>
+          <label for="apply" class="active">Apply By</label>
+        </div>
       </div>
       <div class="row">
-        <div class="input-field col s12 l10 offset-l1">
-          <textarea type="text" name="description" class="materialize-textarea" rows="2" id="desc" placeholder="Write something about the job ... (max. 140 characters)" maxlength="140"></textarea>
+        <div class="input-field col s12 l5 m6 offset-l1 ">
+          <textarea name="description" class="materialize-textarea" rows="2" id="desc" placeholder="Max. 140 characters" maxlength="140" required></textarea>
           <label for="desc" class="active">Job Description</label>
+        </div>
+        <div class="input-field col s12 l5 m6">
+          <textarea name="eligibility" class="materialize-textarea" rows="1" id="eleg" required></textarea>
+          <label for="elig">Who can apply?</label>
         </div>
       </div>
       <div class="row" align="center">
