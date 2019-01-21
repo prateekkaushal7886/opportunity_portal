@@ -3,7 +3,7 @@ session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "myimprint";
+$dbname = "jobportal";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

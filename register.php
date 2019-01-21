@@ -3,7 +3,7 @@ session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "myimprint";
+$dbname = "jobportal";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -19,17 +19,21 @@ if(isset($_POST['submit1'])){
 	$password = hash('sha256', $_POST['confirm_password']);
 	date_default_timezone_set('Asia/Kolkata');
 	$time=date("Y-m-d H:i:s"); 
-
-	$sql = "INSERT INTO students (email, firstname, lastname, rollno, password, time) 
-	VALUES ('$email', '$firstname', '$lastname', '$rollno', '$password', '$time')";
-	$_SESSION['email'] = $email;
+	$query = "SELECT * FROM students where rollno = '".$rollno."' OR email = '".$email."'";
+	if(empty($query)) {
+		$sql = "INSERT INTO students (email, firstname, lastname, rollno, password, time) 
+		VALUES ('$email', '$firstname', '$lastname', '$rollno', '$password', '$time')";
+		$_SESSION['email'] = $email;
+		if ($conn->query($sql) === TRUE) {
+			echo "1";
+			$conn->close();
+		} else {
+			echo "Error: " . $sql . "<br>" . $conn->error;
+		}
+	}
+	else {
+		echo "0"
+	};
 	
 }
-if ($conn->query($sql) === TRUE) {
-    header('location: home.php');
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
-$conn->close();
-
 ?>

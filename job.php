@@ -3,7 +3,7 @@ session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "myimprint";
+$dbname = "jobportal";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -15,6 +15,7 @@ if(isset($_POST['submit2'])){
 	$company = $_POST['company'];
 	$position = $_POST['pos'];
 	$location = $_POST['location'];
+	$work = $_POST['work'];
 	$start = $_POST['start'];
 	$duration = $_POST['duration'];
 	$stipend = $_POST['stipend'];
@@ -24,8 +25,8 @@ if(isset($_POST['submit2'])){
 	date_default_timezone_set('Asia/Kolkata');
 	$time=date("Y-m-d H:i:s"); 
 
-	$sql = "INSERT INTO jobs (company, position, location, start, duration, stipend, applyby, description, eligibility, time) 
-	VALUES ('$company', '$position', '$location', '$start', '$duration', '$stipend', '$applyBy', '$description', '$eligibility', '$time')";
+	$sql = "INSERT INTO jobs (company, position, location, work, start, duration, stipend, applyby, description, eligibility, time) 
+	VALUES ('$company', '$position', '$location', '$work', '$start', '$duration', '$stipend', '$applyBy', '$description', '$eligibility', '$time')";
 	
 }
 if ($conn->query($sql) === TRUE) {
