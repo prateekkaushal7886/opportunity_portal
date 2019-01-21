@@ -174,7 +174,7 @@ body{overflow-x: hidden;}
       </ul>
     </div>
     <!--LOGIN FORM-->
-    <form id="login_form" method="POST" action="login.php">
+    <form id="login_form" method="POST">
       <div class="row">
         <div class="input-field col s12 l6 m12 offset-l3 ">
           <input name="rollno" autofocus placeholder="Roll Number" type="text" required>
@@ -195,7 +195,7 @@ body{overflow-x: hidden;}
     </form>
     <!--LOGIN END FORM-->
     <!--REGISTER FORM-->
-    <form id="register_form" method="post" action="register.php" onsubmit="return issame();">
+    <form id="register_form" method="post" onsubmit="return issame();">
       <div class="row">
         <div class="input-field col s12 l5 m6 offset-l1">
           <input type="text" name="firstname" id="firstname" placeholder="First Name..." required>
@@ -258,10 +258,11 @@ body{overflow-x: hidden;}
           <label for="loc">Location</label>
         </div>
         <div class="input-field col s12 l5 m6">
-          <select class="">
+          <select class="" name="work">
             <option value="" disabled selected>Choose your option</option>
-            <option value="1">Work from home</option>
-            <option value="2">Part-time</option>
+            <option value="from_home">Work from home</option>
+            <option value="part_time">Part-time</option>
+            <option value="userchoice">Your choice</option>
           </select>
           <label>Work</label>
         </div>
@@ -288,7 +289,7 @@ body{overflow-x: hidden;}
       </div>
       <div class="row">
         <div class="input-field col s12 l5 m6 offset-l1 ">
-          <textarea name="description" class="materialize-textarea" rows="2" id="desc" placeholder="Max. 140 characters" maxlength="140" required></textarea>
+          <textarea name="description" class="materialize-textarea" rows="2" id="desc" placeholder="Max. 140 characters ..." maxlength="140" required></textarea>
           <label for="desc" class="active">Job Description</label>
         </div>
         <div class="input-field col s12 l5 m6">
@@ -357,6 +358,30 @@ body{overflow-x: hidden;}
   });
     });
   });
+
+  $('#register_form').on('submit', function (e) {
+    e.preventDefault();
+    $.ajax({
+    type: 'post',
+    url: 'register.php',
+    date: $('#register_form').serialize(),
+    success: function (response) {
+      if (response == 1)
+        window.location = "home.php";
+      else if (response == 0){
+        swal({
+          title: "ALREADY REGISTERED!",
+          text: "",
+          icon: "error",
+          buttons: true,
+        }).then((value) => {
+
+        });
+      }
+    }
+  });
+  });
+
 </script> 
 <script>
   $(document).ready(function(){
