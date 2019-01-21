@@ -9,14 +9,14 @@ if(!isset($_SESSION['email'])){
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "myimprint";
+$dbname = "jobportal";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 $query="SELECT * FROM jobs order by time desc";
 if( $query_run = mysqli_query($conn, $query) ){
-  $jobs = mysqli_fetch_assoc($query_run);
-  print_r($jobs);
+  $jobs = mysqli_fetch_all($query_run, MYSQLI_ASSOC);
+  // print_r($jobs);
 }
 ?>
 <!DOCTYPE html>
@@ -43,67 +43,64 @@ if( $query_run = mysqli_query($conn, $query) ){
 	</div>
 	<div class="container">
 		<p class="menuheading animated">Job offers for you</p>
-		<div class="row">
+		<?php 
+		for ($i=0; $i < sizeof($jobs); $i++) { 
+			echo '<div class="row" style="margin-bottom: 0px;">
 			<div class="col s10 offset-s1">
-				<div class="card hoverable">
-					<div class="card-content">
-						<span class="menuheading animated" style="font-size: 18px;">Special Thanks to</span>
-						<div class="row" style="margin-bottom: 0px;">
-							<div class="col s12"><h6 style="font-weight: bold">Location: </h6>
-								<table class="responsive-table" style="line-height: 0;">
-									<thead>
-										<tr>
-											<th>Start Date</th>
-											<th>Duration</th>
-											<th>Stipend</th>
-											<th>Posted on</th>
-											<th>Apply By</th>
-										</tr>
-									</thead>
+			<div class="card hoverable">
+			<div class="card-content">
+			<span class="menuheading animated" style="font-size: 18px; padding-left: 7px">'.$jobs[$i]['company'].'</span>
+			<div class="row" style="margin-bottom: 0px;">
+			<div class="col s12"><h6><span style="font-weight: bold; padding-left: 7px">Location: </span>'.$jobs[$i]['location'].'</h6>
+			<table class="responsive-table" style="line-height: 0; padding-left: 0px;">
+			<thead>
+			<tr>
+			<th>Start Date</th>
+			<th>Duration</th>
+			<th>Stipend</th>
+			<th>Posted on</th>
+			<th>Apply By</th>
+			</tr>
+			</thead>
 
-									<tbody>
-										<tr>
-											<td>Alvin</td>
-											<td>Eclair</td>
-											<td>$0.87</td>
-											<td>rfd</td>
-											<td>rgfd</td>
-										</tr>
-									</tbody>
-								</table>
-								<h6 style="font-weight: bold">Job Description:</h6>
-								<p style="font-size: 100%; margin-top: 0">70% of Class of 2014 voted for the gift in various categories and close to 350 students contributed their caution money.<br>
-       Class of 2014 voted to support International Participation of students.</p>
-							</div>
-						</div>
-						<div class="row" style="margin-bottom: 0;">
-							<a class="btn modal-trigger animated" href="#modal" style="margin-left: 10px; margin-top: 5px;">Apply Now</a>
-						</div>
-					</div>
-				</div>
+			<tbody>
+			<tr>
+			<td>'.date("d-m-y", strtotime($jobs[$i]['start'])).'</td>
+			<td>'.$jobs[$i]['duration'].' month</td>
+			<td>'.$jobs[$i]['stipend'].'</td>
+			<td>'.date("d-m-y", strtotime($jobs[$i]['time'])).'</td>
+			<td>'.$jobs[$i]['applyby'].'</td>
+			</tr>
+			</tbody>
+			</table>
+			<h6 style="font-weight: bold; padding-left: 3px">Job Description:</h6>
+			<p style="font-size: 100%; margin-top: 0;  padding-left: 5px">'.$jobs[$i]['description'].'</p>
 			</div>
-		</div>
+			</div>
+			<div class="row" style="margin-bottom: 0;">
+			<a class="btn modal-trigger animated apply_btn" href="#modal" id="'.$jobs[$i]['id'].'" style="margin-left: 10px; margin-top: 5px;">Apply Now</a>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>';
+		}
+		?>
+		
 	</div>
 </body>
 <!-- Modal -->
 <div id="modal" class="modal">
-  <span style="float: right; cursor: pointer;"><i class="material-icons modal-action modal-close" style="font-size: 30px; margin-right: 5px;">&times</i></span>
-  <div class="modal-content">
-    <h4 class="menuheading animated">Apply</h4>
-   	<form action="applied.php" method="post">
-   		<div class="row">
-   			<div class="s12">
-   				<h6 style="font-weight: bold">Job Description:</h6>
-   				<p style="font-size: 100%; margin-top: 0">70% of Class of 2014 voted for the gift in various categories and close to 350 students contributed their caution money.<br>
-       Class of 2014 voted to support International Participation of students.</p>
-       <h6 style="font-weight: bold">Who can apply?</h6>
-   				<p style="font-size: 100%; margin-top: 0">70% of Class of 2014 voted for the gift in various categories and close to 350 students contributed their caution money.<br>
-       Class of 2014 voted to support International Participation of students.</p>
-   			</div>
-   		</div>
-   	</form>
-    
-  </div>
+	<span style="float: right; cursor: pointer;"><i class="material-icons modal-action modal-close" style="font-size: 30px; margin-right: 5px;">&times</i></span>
+	<div class="modal-content">
+		<h4 class="menuheading animated">Apply</h4>
+		<div class="row" id="job_data">
+			
+			
+
+
+		</div>
+	</div>
 </div>
 
 </html>
@@ -130,4 +127,19 @@ if( $query_run = mysqli_query($conn, $query) ){
 	$(document).ready(function() {
 		$('.modal-trigger').leanModal();
   });
+ </script>
+ <script type="text/javascript">
+ 	$(document).ready(function() {
+ 		$('.apply_btn').click(function() {
+ 			var id = $(this).attr('id');
+ 			$.ajax({
+ 				type: 'post',
+ 				url: 'getdata.php',
+ 				data: {'id': id},
+ 				success: function (response) {
+ 					document.getElementById('job_data').innerHTML = response;
+ 				}
+ 			});
+ 		});
+ 	});
  </script>
