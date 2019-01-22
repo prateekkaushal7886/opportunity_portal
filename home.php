@@ -6,18 +6,21 @@ if(!isset($_SESSION['email'])){
 }
 ?>
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobportal";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+require 'connection.php';
 $query="SELECT * FROM jobs order by time desc";
 if( $query_run = mysqli_query($conn, $query) ){
   $jobs = mysqli_fetch_all($query_run, MYSQLI_ASSOC);
   // print_r($jobs);
 }
+$q="SELECT job_id FROM jobapplied WHERE rollno = '".$_SESSION['rollno']."'";
+if( $query_run = mysqli_query($conn, $q) ){
+	$job_ids = array();
+  if ($query_run->num_rows > 0 ) {
+  	while($ids = $query_run->fetch_array())
+  		$job_ids[] = $ids;
+  }
+}
+// print_r(sizeof($job_ids));
 ?>
 <!DOCTYPE html>
 <html>
@@ -93,10 +96,6 @@ if( $query_run = mysqli_query($conn, $query) ){
 	<div class="modal-content">
 		<h4 class="menuheading animated">Apply</h4>
 		<div class="row" id="job_data">
-			
-			
-
-
 		</div>
 	</div>
 </div>

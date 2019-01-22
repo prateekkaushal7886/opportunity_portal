@@ -1,16 +1,6 @@
 <?php
 session_start();
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobportal";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-	die("Connection failed: " . $conn->connect_error);
-}
+require 'connection.php';
 
 $rollno = $_POST['rollno'];
 $password = hash('sha256', $_POST['password']);
@@ -23,6 +13,7 @@ if(!empty($rollno) && !empty($password)) {
 		$res = $conn->query($query)->fetch_assoc();
 		// print_r($res);
 		$_SESSION['email'] = $res["email"];
+		$_SESSION['rollno'] = $res['rollno'];
 		echo "2";
 	}
 	else{

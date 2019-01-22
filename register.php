@@ -1,16 +1,6 @@
 <?php
 session_start();
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobportal";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-	die("Connection failed: " . $conn->connect_error);
-}
+require 'connection.php';
 if(isset($_POST['submit1'])){
 	$firstname = $_POST['firstname'];
 	$lastname = $_POST['lastname'];
@@ -20,20 +10,23 @@ if(isset($_POST['submit1'])){
 	date_default_timezone_set('Asia/Kolkata');
 	$time=date("Y-m-d H:i:s"); 
 	$query = "SELECT * FROM students where rollno = '".$rollno."' OR email = '".$email."'";
-	if(empty($query)) {
+	$query_run = mysqli_query($conn, $query);
+	$data = mysqli_fetch_all($query_run, MYSQLI_ASSOC);	
+	if(count($data) == 0) {
 		$sql = "INSERT INTO students (email, firstname, lastname, rollno, password, time) 
 		VALUES ('$email', '$firstname', '$lastname', '$rollno', '$password', '$time')";
 		$_SESSION['email'] = $email;
+		$_SESSION['rollno'] = $rollno;
 		if ($conn->query($sql) === TRUE) {
 			echo "1";
-			$conn->close();
+			
 		} else {
 			echo "Error: " . $sql . "<br>" . $conn->error;
 		}
 	}
 	else {
 		echo "0";
-	}
-	
+	}	
 }
+$conn->close();
 ?>
