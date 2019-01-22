@@ -17,6 +17,14 @@
 </head>
 <style type="text/css">
 body{overflow-x: hidden;}
+.thanks{
+  font-weight: bolder;
+  text-align: center;
+  margin-top: -20px !important;
+}
+.clearfix {
+  overflow: auto;
+}
 </style>
 
 <body>
@@ -27,11 +35,6 @@ body{overflow-x: hidden;}
         <ul class="right hide-on-med-and-down">
           <li><a class="waves-effect waves-light item animated" href="http://www.sac.iitkgp.ac.in/">HOME</a></li>
           <li><a class="waves-effect waves-light item animated" href="#what">WHAT</a></li>
-          <li><a class="waves-effect waves-light item animated" href="#why">WHY</a></li>
-          <li><a class="waves-effect waves-light item animated" href="#options">OPTIONS</a></li>
-          <li><a class="waves-effect waves-light item animated" href="#how">HOW TO</a></li>
-          <!--<li><a class="waves-effect waves-light item animated" href="#committee">THE COMMITTEE</a></li>-->
-          <li><a class="waves-effect waves-light item animated" href="#recognition">RECOGNITION</a></li>
           <li><a class="waves-effect waves-light item animated" href="#classgift">PREVIOUS CLASS GIFTS</a></li>
           <li><a class="waves-effect waves-light item animated" href="#contact">CONTACT</a></li>
         </ul>
@@ -39,11 +42,6 @@ body{overflow-x: hidden;}
         <ul id="nav-mobile" class="side-nav">
           <li><a href="http://www.sac.iitkgp.ac.in/">HOME</a></li>
           <li><a href="#what">WHAT</a></li>
-          <li><a href="#why">WHY</a></li>
-          <li><a href="#options">OPTIONS</a></li>
-          <li><a href="#how">HOW TO</a></li>
-          <!--<li><a href="#committee">THE COMMITTEE</a></li>-->
-          <li><a href="#recognition">RECOGNITION</a></li>
           <li><a href="#classgift">PREVIOUS CLASS GIFTS</a></li>
           <li><a class="waves-effect waves-light"href="#contact">CONTACT</a></li>
 
@@ -58,20 +56,21 @@ body{overflow-x: hidden;}
   <!-- <div id="index-banner" class="parallax-container">
     <div class="parallax"><img src="My Imprint.jpg"></div>
   </div> -->
-  <div class="container scrollspy"id="what">
+  <div class="scrollspy" id="what">
     <p class="menuheading animated">What you can do here ?</p>
-    <p class="text">
-     IIT-KGP has a long and historic legacy of Alumni Giving Back which has existed in different forms. The Graduating Class Gift is yet another chapter to be added in KGP alumni legacy initiated under My Imprint Programme.
+    <div class="container">
+      <p class="text">
+       IIT-KGP has a long and historic legacy of Alumni Giving Back which has existed in different forms. The Graduating Class Gift is yet another chapter to be added in KGP alumni legacy initiated under My Imprint Programme.
 
-     It is a class-based effort directed towards raising unrestricted funds from students of graduating batch. A part of the collected fund is used for Senior Class Gift while the rest goes towards Endowment. The Endowment would again be utilized for students' services only. It is an opportunity for graduating students to take their first step in being soon-to-be alumni by making their Graduating Class Gift, the gift which impacts student life in the KGP campus. This challenge offers seniors the chance not only to make a gift, but also to leave behind their imprint.
-   </p>
+       It is a class-based effort directed towards raising unrestricted funds from students of graduating batch. A part of the collected fund is used for Senior Class Gift while the rest goes towards Endowment. The Endowment would again be utilized for students' services only. It is an opportunity for graduating students to take their first step in being soon-to-be alumni by making their Graduating Class Gift, the gift which impacts student life in the KGP campus. This challenge offers seniors the chance not only to make a gift, but also to leave behind their imprint.
+     </p>
+   </div>
  </div>
-
  <div class="scrollspy" id="classgift">
   <p class="menuheading animated">PREVIOUS CLASS GIFTS</p>
   <div class="container">
     <div class="row">
-      <div class="col l4 m6 s12">
+      <div class="col l6 m6 s12">
         <div class="card hoverable">
           <div class="card-image">
             <img src="img/classgift2.jpg">
@@ -80,15 +79,15 @@ body{overflow-x: hidden;}
            <span class="card-title">CLASS GIFT OF 2016</span>
            <p class="text" style="font-size: 100%; padding-bottom: 12px;">80% of Class of 2016 voted for the gift in various categories and close to 400 students contributed their caution money.<br>
            Class of 2015 voted to gift Campus Benches.</p>
-           <div class="row" align="center">
+           <div class="row" align="center" style=" margin-bottom: -15px;">
              <a class="btn modal-trigger animated" href="#modal1">Login</a>
-             <p style="margin-top: 10px;">Don't have account?<a class="modal-trigger" href="#modal1"> Register</a></p>
+             <p style="margin-top: 8px;">Don't have account?<a class="modal-trigger" href="#modal1"> Register</a></p>
            </div>
          </div>
        </div>
      </div>
 
-     <div class="col l4 m6 s12">
+     <div class="col l6 m6 s12">
       <div class="card hoverable">
         <div class="card-image">
           <img src="img/classgift.jpg">
@@ -104,35 +103,27 @@ body{overflow-x: hidden;}
     </div>
   </div>
 
-  <div class="col l4 m6 offset-m3 s12" style="float: left;">
-    <div class="card hoverable">
-      <div class="card-image">
-        <img src="img/2014.jpg">
-      </div>
-      <div class="card-content">
-       <span class="card-title">CLASS GIFT OF 2014</span>
-       <p class="text" style="font-size: 100%;">70% of Class of 2014 voted for the gift in various categories and close to 350 students contributed their caution money.<br>
+</div>
+</div>
+</div>
+<div class="container">
+  <div class="row">
+    <center><div class="col s12">
+      <div class="card hoverable">
+        <div class="card-content clearfix" id="image">
+         <span class="menuheading animated">Special Thanks to</span>
+         <p class="text thanks">
+          Mr. Vishal Kumar Singh<br> Vice-President, Gymkhana
+        </p>
+        <div id="img" class="">
+         <img src="img/profile2.jpg" id="pic" width="170px" height="170px" style="float: right; margin-top: -110px">
+       </div>
+       <p class="text" style="font-size: 120%; margin-top: -30px;">70% of Class of 2014 voted for the gift in various categories and close to 350 students contributed their caution money.
        Class of 2014 voted to support International Participation of students.</p>
      </div>
    </div>
- </div>
+ </div></center>
 </div>
-</div>
-</div>
-<div class="scrollspy" id='how'>
-  <div class="container">
-    <div class="row">
-      <center><div class="col s12">
-        <div class="card hoverable">
-          <div class="card-content">
-           <span class="menuheading animated">Special Thanks to</span>
-           <p class="text" style="font-size: 120%;">70% of Class of 2014 voted for the gift in various categories and close to 350 students contributed their caution money.<br>
-           Class of 2014 voted to support International Participation of students.</p>
-         </div>
-       </div>
-     </div></center>
-   </div>
- </div>
 </div>
 <div id="contact" class="scrollspy">
   <footer class="page-footer white"><center>
@@ -260,11 +251,10 @@ body{overflow-x: hidden;}
         <div class="input-field col s12 l5 m6">
           <select class="" name="work">
             <option value="" disabled selected>Choose your option</option>
-            <option value="from_home">Work from home</option>
-            <option value="part_time">Part-time</option>
-            <option value="userchoice">Your choice</option>
+            <option value="home">Work from home</option>
+            <option value="office">Work from Office</option>
           </select>
-          <label>Work</label>
+          <label>Work from</label>
         </div>
       </div> 
       <div class="row">
@@ -362,24 +352,24 @@ body{overflow-x: hidden;}
   $('#register_form').on('submit', function (e) {
     e.preventDefault();
     $.ajax({
-    type: 'post',
-    url: 'register.php',
-    date: $('#register_form').serialize(),
-    success: function (response) {
-      if (response == 1)
-        window.location = "home.php";
-      else if (response == 0){
-        swal({
-          title: "ALREADY REGISTERED!",
-          text: "",
-          icon: "error",
-          buttons: true,
-        }).then((value) => {
+      type: 'post',
+      url: 'register.php',
+      date: $('#register_form').serialize(),
+      success: function (response) {
+        if (response == 1)
+          window.location = "home.php";
+        else if (response == 0){
+          swal({
+            title: "ALREADY REGISTERED!",
+            text: "",
+            icon: "error",
+            buttons: true,
+          }).then((value) => {
 
-        });
+          });
+        }
       }
-    }
-  });
+    });
   });
 
 </script> 
@@ -411,6 +401,16 @@ body{overflow-x: hidden;}
       return false;
     }
   }
+  $(document).ready(function() {
+    if($(window).width() < 530){
+      $('#image').removeClass('clearfix');
+    }
+    if($(window).width() < 866){
+      $('#img').addClass('col s12');
+      $('#img').attr('align', 'center');
+      $('#pic').css({"float":"none", "margin-top":"0"});
+    }
+  });
 </script>
 
 </body>
