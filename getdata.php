@@ -24,6 +24,12 @@ if( $query_run = mysqli_query($conn, $query) ){
 	<p style="font-size: 100%; margin-top: 0">'.$job['eligibility'].'</p
 	</div>
 	<form action="applied.php" method="post">
+	<div class="row">
+	<div class="input-field col l6 s12" style="margin-left: -12px;">
+	<input type="text" name="why" id="why" placeholder="Max. 140 characters ..." maxlength="140" required>
+	<label for="why" class="active">Why do you want to apply?</label>
+	</div>
+	</div>
 	<div class="row" style="margin-bottom: -20px;" align="center">
 	<button class="btn animated" type="submit" id="'.$job['id'].'" style="margin-left: 10px; margin-top: 5px;">Apply Now</button>
 	</div>

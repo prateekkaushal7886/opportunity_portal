@@ -32,8 +32,8 @@ if(isset($_POST['submit1'])){
 		}
 	}
 	else {
-		echo "0"
-	};
+		echo "0";
+	}
 	
 }
 ?>

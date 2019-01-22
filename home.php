@@ -34,8 +34,6 @@ if( $query_run = mysqli_query($conn, $query) ){
 
 </head>
 <body>
-	hello
-	<?php echo $_SESSION['email']; ?>
 	<div class="fixed-action-btn" style="bottom: 25px; right: 25px;" id="power">
 		<a class="btn-floating btn-large tooltipped" data-position="top" data-delay="50" data-tooltip="Logout" id="logout" >
 			<i class="large material-icons" style="font-size: 30px">power_settings_new</i>
