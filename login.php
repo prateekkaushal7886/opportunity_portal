@@ -23,4 +23,5 @@ if(!empty($rollno) && !empty($password)) {
 else{
 	echo "0";
 }
+die();
 ?>

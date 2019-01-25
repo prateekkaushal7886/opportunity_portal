@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +34,9 @@ body{overflow-x: hidden;}
   <div class="navbar-fixed">
     <nav class="white" role="navigation">
       <div class="nav-wrapper">
-        <a href="http://www.sac.iitkgp.ac.in/" class="brand-logo left"style="padding-left: 10px; padding-top: 5px;"><img src="logo.png" width="160px"></a>
+        <a href="http://www.sac.iitkgp.ac.in/" class="brand-logo left"style="padding-top: 5px;">
+          <img src="img/logo.png" width="160px">
+        </a>
         <ul class="right hide-on-med-and-down">
           <li><a class="waves-effect waves-light item animated" href="http://www.sac.iitkgp.ac.in/">HOME</a></li>
           <li><a class="waves-effect waves-light item animated" href="#what">WHAT</a></li>
@@ -81,7 +86,7 @@ body{overflow-x: hidden;}
            Class of 2015 voted to gift Campus Benches.</p>
            <div class="row" align="center" style=" margin-bottom: -15px;">
              <a class="btn modal-trigger animated" href="#modal1">Login</a>
-             <p style="margin-top: 8px;">Don't have account?<a class="modal-trigger" href="#modal1"> Register</a></p>
+             <p style="margin-top: 8px;">Don't have an account?<a class="modal-trigger" href="#modal1"> Register</a></p>
            </div>
          </div>
        </div>
@@ -124,40 +129,15 @@ body{overflow-x: hidden;}
    </div>
  </div></center>
 </div>
+<hr />
 </div>
 <div id="contact" class="scrollspy">
-  <footer class="page-footer white"><center>
-    <p class="menuheading animated">CONTACT</p>
-    <p class="text" style="padding: 0px; font-weight: bold"> Office of Alumni Affairs and International Relations</p>
-    <p class="smalltext">alumni@hijli.iitkgp.ernet.in<br>
-    03222 281860</p>
-    <div class="container">
-      <div class="row">
-        <p class="text" style="padding: 0px; font-weight: bold">Students' Alumni Cell General Secretaries</p>
-        <div class="col l4 m4 s12 offset-l2">
-          <p class="smalltext">Vasanta Majety<br>
-            vasantamajety@gmail.com<br>
-            +91 7477745444
-          </p>
-        </div>
-        <div class="col l4 m4 s12 ">
-          <p class="smalltext">Gautam Arya<br>
-            gautam25arya@gmail.com<br>
-          +91 8349702291</p>
-        </div>
-      </div>
-    </div>
-    <div class="footer-copyright">
-      <p class="text black" style="padding-top: 5px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;height: 50px">&copy;Copyrights reserved 2018</p>
-    </div>
-  </center>
-</footer>
+  <?php include('footer.php'); ?>
 </div>
 
 <!-- Modal Structure -->
 <div id="modal1" class="modal">
   <div class="modal-content">
-    <h4 class="menuheading animated">Enter Your Details</h4>
     <div class="col l6 s12 offset-l3" style="margin-bottom: 20px;">
       <ul class="tabs">
         <li class="tab col s3"><a class="active" href="#login_form" style="color: #26a69a !important;">Login</a></li>
@@ -166,9 +146,10 @@ body{overflow-x: hidden;}
     </div>
     <!--LOGIN FORM-->
     <form id="login_form" method="POST">
+      <h4 class="menuheading animated">Login Here</h4>
       <div class="row">
         <div class="input-field col s12 l6 m12 offset-l3 ">
-          <input name="rollno" autofocus placeholder="Roll Number" type="text" required>
+          <input name="rollno" autofocus placeholder = "Roll Number" type="text" required>
           <label for="rollno">Roll Number ( 14THXXXXX )</label>
         </div> 
       </div>
@@ -186,7 +167,8 @@ body{overflow-x: hidden;}
     </form>
     <!--LOGIN END FORM-->
     <!--REGISTER FORM-->
-    <form id="register_form" method="post" onsubmit="return issame();">
+    <form id="register_form" method="post" onsubmit="return issame();" action="register.php">
+      <h4 class="menuheading animated">Register Here</h4>
       <div class="row">
         <div class="input-field col s12 l5 m6 offset-l1">
           <input type="text" name="firstname" id="firstname" placeholder="First Name..." required>
@@ -348,31 +330,29 @@ body{overflow-x: hidden;}
   });
     });
   });
+</script>
 
-  $('#register_form').on('submit', function (e) {
-    e.preventDefault();
-    $.ajax({
-      type: 'post',
-      url: 'register.php',
-      date: $('#register_form').serialize(),
-      success: function (response) {
-        if (response == 1)
-          window.location = "home.php";
-        else if (response == 0){
-          swal({
-            title: "ALREADY REGISTERED!",
-            text: "",
-            icon: "error",
-            buttons: true,
-          }).then((value) => {
+<?php 
+  if($_SESSION['registered'] == 1) {
+    echo "<script>
+    swal({
+      title: 'ALREADY REGISTERED!',
+      text: '',
+      icon: 'error',
+      buttons: true,
+    });</script>";
+  }
 
-          });
-        }
-      }
-    });
-  });
-
-</script> 
+  elseif ($_SESSION['registered'] == 2) {
+    echo "<script>
+    swal({
+      title: 'TRY AGAIN',
+      text: 'Connection error',
+      icon: 'error',
+      buttons: true,
+    });</script>";
+  }
+?>
 <script>
   $(document).ready(function(){
     $(".item , .menuheading").hover(

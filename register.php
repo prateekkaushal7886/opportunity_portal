@@ -12,21 +12,25 @@ if(isset($_POST['submit1'])){
 	$query = "SELECT * FROM students where rollno = '".$rollno."' OR email = '".$email."'";
 	$query_run = mysqli_query($conn, $query);
 	$data = mysqli_fetch_all($query_run, MYSQLI_ASSOC);	
+	// print_r(count($data));
 	if(count($data) == 0) {
 		$sql = "INSERT INTO students (email, firstname, lastname, rollno, password, time) 
 		VALUES ('$email', '$firstname', '$lastname', '$rollno', '$password', '$time')";
 		$_SESSION['email'] = $email;
 		$_SESSION['rollno'] = $rollno;
 		if ($conn->query($sql) === TRUE) {
-			echo "1";
+			header("location: home.php");
 			
 		} else {
+			$_SESSION['registered'] = 2;
 			echo "Error: " . $sql . "<br>" . $conn->error;
 		}
 	}
 	else {
-		echo "0";
-	}	
+		$_SESSION['registered'] = 1;
+		header("location: index.php");
+	}
+	die();	
 }
 $conn->close();
 ?>
