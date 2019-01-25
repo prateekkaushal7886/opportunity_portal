@@ -63,7 +63,7 @@ if(isset($_POST['submit'])) {
 				VALUES ('$job_id', '$rollno', '$why', '$target_file', '$time')";
 				if ($conn->query($job) === TRUE) {
 					$conn->close();
-					header("location: home.php");
+					header("location: appliedjobs.php");
 				} else {
 					echo "Error: " . $sql . "<br>" . $conn->error;
 				}
