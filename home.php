@@ -9,18 +9,18 @@ if(!isset($_SESSION['email'])){
 require 'connection.php';
 $query="SELECT * FROM jobs order by time desc";
 if( $query_run = mysqli_query($conn, $query) ){
-  $jobs = mysqli_fetch_all($query_run, MYSQLI_ASSOC);
+	$jobs = mysqli_fetch_all($query_run, MYSQLI_ASSOC);
   // print_r($jobs);
 }
 $q="SELECT job_id FROM jobapplied WHERE rollno = '".$_SESSION['rollno']."'";
 if( $query_run = mysqli_query($conn, $q) ){
 	$job_ids = array();
-  if ($query_run->num_rows > 0 ) {
-  	while($ids = $query_run->fetch_array())
-  		$job_ids[] = $ids;
-  }
+	if ($query_run->num_rows > 0 ) {
+		while($ids = $query_run->fetch_array())
+			$job_ids[] = $ids['job_id'];
+	}
 }
-// print_r(sizeof($job_ids));
+// print_r($job_ids);
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,52 +42,99 @@ if( $query_run = mysqli_query($conn, $q) ){
 			<i class="large material-icons" style="font-size: 30px">power_settings_new</i>
 		</a>
 	</div>
+	<div class="navbar-fixed">
+		<nav class="white" role="navigation">
+			<div class="nav-wrapper">
+				<a href="http://www.sac.iitkgp.ac.in/" class="brand-logo left"style="padding-left: 10px; padding-top: 5px;"><img src="img/logo.png" width="160px"></a>
+				<ul class="right hide-on-med-and-down">
+					<li><a class="waves-effect waves-light item animated" href="home.php">HOME</a></li>
+					<li><a class="waves-effect waves-light item animated" href="#classgift">PREVIOUS CLASS GIFTS</a></li>
+					<li><a class="waves-effect waves-light item animated" href="#contact">CONTACT</a></li>
+					<li><a class="waves-effect waves-light item animated" href="appliedjobs.php">APPLIED JOBS</a></li>
+				</ul>
+
+				<ul id="nav-mobile" class="side-nav">
+					<li><a href="home.php">HOME</a></li>
+					<li><a href="#classgift">PREVIOUS CLASS GIFTS</a></li>
+					<li><a class="waves-effect waves-light"href="#contact">CONTACT</a></li>
+
+				</ul>
+				<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+			</div>
+		</nav>
+	</div>
+	<div class="scrollspy" id="what">
+		<p class="menuheading animated">What you can do here ?</p>
+		<div class="container"><center>
+			<p class="text">
+				Here You can find the job offers offered by the companies.<br>
+				If you want apply for any job which suits you, upload your Resume!<br>
+				To see the jobs that you have applied for Click <a href="appliedjobs.php">HERE!</a>
+			</p></center>
+		</div>
+	</div>
 	<div class="container">
 		<p class="menuheading animated">Job offers for you</p>
 		<?php 
-		for ($i=0; $i < sizeof($jobs); $i++) { 
+		if(sizeof($jobs) != 0) {
+			for ($i=0; $i < sizeof($jobs); $i++) { 
+				if(!in_array($jobs[$i]['id'], $job_ids)) { 
+					echo '<div class="row" style="margin-bottom: 0px;">
+					<div class="col s10 offset-s1">
+					<div class="card hoverable">
+					<div class="card-content">
+					<span class="menuheading animated" style="font-size: 18px; padding-left: 7px">'.$jobs[$i]['company'].'</span>
+					<div class="row" style="margin-bottom: 0px;">
+					<div class="col s12"><h6><span style="font-weight: bold; padding-left: 7px">Location: </span>'.$jobs[$i]['location'].'</h6>
+					<table class="responsive-table" style="line-height: 0; padding-left: 0px;">
+					<thead>
+					<tr>
+					<th>Start Date</th>
+					<th>Duration</th>
+					<th>Stipend</th>
+					<th>Posted on</th>
+					<th>Apply By</th>
+					</tr>
+					</thead>
+
+					<tbody>
+					<tr>
+					<td>'.date("d-m-y", strtotime($jobs[$i]['start'])).'</td>
+					<td>'.$jobs[$i]['duration'].' month</td>
+					<td>'.$jobs[$i]['stipend'].'</td>
+					<td>'.date("d-m-y", strtotime($jobs[$i]['time'])).'</td>
+					<td>'.$jobs[$i]['applyby'].'</td>
+					</tr>
+					</tbody>
+					</table>
+					<h6 style="font-weight: bold; padding-left: 3px">Job Description:</h6>
+					<p style="font-size: 100%; margin-top: 0;  padding-left: 5px">'.$jobs[$i]['description'].'</p>
+					</div>
+					</div>
+					<div class="row" style="margin-bottom: 0;">
+					<a class="btn modal-trigger animated apply_btn" href="#modal" id="'.$jobs[$i]['id'].'" style="margin-left: 10px; margin-top: 5px;">Apply Now</a>
+					</div>
+					</div>
+					</div>
+					</div>
+					</div>';
+				}
+			}
+		}
+		else {
 			echo '<div class="row" style="margin-bottom: 0px;">
 			<div class="col s10 offset-s1">
 			<div class="card hoverable">
 			<div class="card-content">
-			<span class="menuheading animated" style="font-size: 18px; padding-left: 7px">'.$jobs[$i]['company'].'</span>
-			<div class="row" style="margin-bottom: 0px;">
-			<div class="col s12"><h6><span style="font-weight: bold; padding-left: 7px">Location: </span>'.$jobs[$i]['location'].'</h6>
-			<table class="responsive-table" style="line-height: 0; padding-left: 0px;">
-			<thead>
-			<tr>
-			<th>Start Date</th>
-			<th>Duration</th>
-			<th>Stipend</th>
-			<th>Posted on</th>
-			<th>Apply By</th>
-			</tr>
-			</thead>
-
-			<tbody>
-			<tr>
-			<td>'.date("d-m-y", strtotime($jobs[$i]['start'])).'</td>
-			<td>'.$jobs[$i]['duration'].' month</td>
-			<td>'.$jobs[$i]['stipend'].'</td>
-			<td>'.date("d-m-y", strtotime($jobs[$i]['time'])).'</td>
-			<td>'.$jobs[$i]['applyby'].'</td>
-			</tr>
-			</tbody>
-			</table>
-			<h6 style="font-weight: bold; padding-left: 3px">Job Description:</h6>
-			<p style="font-size: 100%; margin-top: 0;  padding-left: 5px">'.$jobs[$i]['description'].'</p>
-			</div>
-			</div>
-			<div class="row" style="margin-bottom: 0;">
-			<a class="btn modal-trigger animated apply_btn" href="#modal" id="'.$jobs[$i]['id'].'" style="margin-left: 10px; margin-top: 5px;">Apply Now</a>
-			</div>
-			</div>
-			</div>
-			</div>
-			</div>';
+			<center><p class="text">Sorry, No Jobs has been offered!</p></center>
+			</div></div></div></div>
+			';
 		}
 		?>
-		
+		<hr />
+	</div>
+	<div id="contact" class="scrollspy">
+		<?php include('footer.php'); ?>
 	</div>
 </body>
 <!-- Modal -->
@@ -123,20 +170,20 @@ if( $query_run = mysqli_query($conn, $q) ){
 	});
 	$(document).ready(function() {
 		$('.modal-trigger').leanModal();
-  });
- </script>
- <script type="text/javascript">
- 	$(document).ready(function() {
- 		$('.apply_btn').click(function() {
- 			var id = $(this).attr('id');
- 			$.ajax({
- 				type: 'post',
- 				url: 'getdata.php',
- 				data: {'id': id},
- 				success: function (response) {
- 					document.getElementById('job_data').innerHTML = response;
- 				}
- 			});
- 		});
- 	});
- </script>
+	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.apply_btn').click(function() {
+			var id = $(this).attr('id');
+			$.ajax({
+				type: 'post',
+				url: 'getdata.php',
+				data: {'id': id},
+				success: function (response) {
+					document.getElementById('job_data').innerHTML = response;
+				}
+			});
+		});
+	});
+</script>
