@@ -214,7 +214,7 @@ body{overflow-x: hidden;}
   <div class="modal-content">
     <h4 class="menuheading animated">Enter Job Details</h4>
     <!--LOGIN FORM-->
-    <form method="POST" action="job.php">
+    <form method="POST" action="job.php" enctype="multipart/form-data">
       <div class="row">
         <div class="input-field col s12 l5 m6 offset-l1 ">
           <input name="company" id="company" autofocus placeholder="Company Name" type="text" required>
@@ -260,12 +260,22 @@ body{overflow-x: hidden;}
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s12 l5 m6 offset-l1 ">
-          <textarea name="description" class="materialize-textarea" rows="2" id="desc" placeholder="Max. 140 characters ..." maxlength="140" required></textarea>
+        <div class="input-field col s12 l10 offset-l1 ">
+          <textarea name="description" class="materialize-textarea" rows="2" id="desc" placeholder="Write something about the job" required></textarea>
           <label for="desc" class="active">Job Description</label>
+          <p style="text-align: center;margin-top: -13px">OR/AND</p>
+          <div class="file-field input-field" style="margin-top: -15px">
+            <div class="btn btn-small">
+              <span>Attach PDF</span>
+              <input type="file" name="filetoupload" id="fileToUpload" accept=".pdf">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+          </div>
         </div>
-        <div class="input-field col s12 l5 m6">
-          <textarea name="eligibility" class="materialize-textarea" rows="1" id="eleg" required></textarea>
+        <div class="input-field col s12 l10 offset-l1">
+          <textarea name="eligibility" class="materialize-textarea" rows="1" id="eleg" placeholder="Eligibility" required></textarea>
           <label for="elig">Who can apply?</label>
         </div>
       </div>
@@ -333,7 +343,18 @@ body{overflow-x: hidden;}
 </script>
 
 <?php 
-  if($_SESSION['registered'] == 1) {
+if(@$_SESSION['posted'] == 1) {
+    echo "<script>
+    swal({
+      title: 'POSTED!',
+      text: 'Your job has been posted.',
+      icon: 'success',
+      buttons: true,
+    });</script>";
+  }
+  unset($_SESSION['posted']);
+
+  if(@$_SESSION['registered'] == 1) {
     echo "<script>
     swal({
       title: 'ALREADY REGISTERED!',
@@ -343,7 +364,7 @@ body{overflow-x: hidden;}
     });</script>";
   }
 
-  elseif ($_SESSION['registered'] == 2) {
+  elseif (@$_SESSION['registered'] == 2) {
     echo "<script>
     swal({
       title: 'TRY AGAIN',
@@ -352,6 +373,7 @@ body{overflow-x: hidden;}
       buttons: true,
     });</script>";
   }
+  unset($_SESSION['registered']);
 ?>
 <script>
   $(document).ready(function(){

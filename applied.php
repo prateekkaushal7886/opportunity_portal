@@ -65,7 +65,7 @@ if(isset($_POST['submit'])) {
 					$conn->close();
 					header("location: appliedjobs.php");
 				} else {
-					echo "Error: " . $sql . "<br>" . $conn->error;
+					echo "Error: " . $job . "<br>" . $conn->error;
 				}
 			}
 			else {

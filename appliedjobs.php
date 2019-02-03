@@ -100,8 +100,6 @@ if( $query_run = mysqli_query($conn, $q) ){
 					</tr>
 					</tbody>
 					</table>
-					<h6 style="font-weight: bold; padding-left: 3px">Job Description:</h6>
-					<p style="font-size: 100%; margin-top: 0;  padding-left: 5px">'.$jobs[$i]['description'].'</p>
 					</div>
 					</div>
 					<div class="row" style="margin-bottom: 0;">
@@ -114,10 +112,10 @@ if( $query_run = mysqli_query($conn, $q) ){
 				}
 			}
 		}
-		else {
+		if (sizeof($job_ids) == 0) {
 			echo '<div class="row" style="margin-bottom: 0px;">
 			<div class="col s10 offset-s1">
-			<div class="card hoverable">
+			<div class="hoverable">
 			<div class="card-content">
 			<center><p class="text">Sorry, You seem to have not applied for any job!</p></center>
 			</div></div></div></div>

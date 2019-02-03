@@ -12,8 +12,12 @@ if( $query_run = mysqli_query($conn, $query) ){
 	}
   // print_r($row);
 	echo '<div class="s12">
-	<h6 style="font-weight: bold">Job Description:</h6>
-	<p style="font-size: 100%; margin-top: 0">'.$job['description'].'</p>
+	<h6 style="font-weight: bold">Job Description:</h6>';
+	if($job['descriptionPdf'])
+		echo '<a href = "'.$job['descriptionPdf'].'" target = "_blank">See the attached file!</a>';
+	else
+		echo "";
+	echo '<p style="font-size: 100%; margin-top: 0">'.$job['description'].'</p>
 	<h6 style="font-weight: bold">Who can apply?</h6>
 	<p style="font-size: 100%; margin-top: 0">'.$job['eligibility'].'</p
 	</div>';
