@@ -7,7 +7,7 @@ if(!isset($_SESSION['email'])){
 ?>
 <?php
 require 'connection.php';
-$query="SELECT * FROM jobs order by time desc";
+$query="SELECT * FROM jobs WHERE approval = '1' order by time desc";
 if( $query_run = mysqli_query($conn, $query) ){
 	$jobs = mysqli_fetch_all($query_run, MYSQLI_ASSOC);
   // print_r($jobs);
@@ -107,8 +107,6 @@ if( $query_run = mysqli_query($conn, $q) ){
 					</tr>
 					</tbody>
 					</table>
-					<h6 style="font-weight: bold; padding-left: 3px">Job Description:</h6>
-					<p style="font-size: 100%; margin-top: 0;  padding-left: 5px">'.$jobs[$i]['description'].'</p>
 					</div>
 					</div>
 					<div class="row" style="margin-bottom: 0;">
