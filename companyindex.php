@@ -46,7 +46,7 @@ if(!isset($_SESSION['email'])){
 	<div class="scrollspy" id="what">
 		<p class="menuheading animated">What you can do here ?</p>
 	</div>
-	 <div class="scrollspy" id="classgift">
+	<div class="scrollspy" id="classgift">
             <p class="menuheading animated"></p>
             <div class="container">
                 <div class="row">
@@ -66,6 +66,84 @@ if(!isset($_SESSION['email'])){
                         </div>
                     </div>
                 </div>
+            </div>
+    </div>
+    <div id="modal2" class="modal">
+            <span style="float: right; cursor: pointer;"><i class="material-icons modal-action modal-close">&times</i></span>
+            <div class="modal-content">
+                <h4 class="menuheading animated">Enter Job Details</h4>
+                <!--LOGIN FORM-->
+                <form method="POST" action="job.php" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="input-field col s12 l5 m6 offset-l1 ">
+                            <input name="company" id="company" autofocus placeholder="Company Name" type="text" required>
+                            <label for="company">Company or Organisation</label>
+                        </div>
+                        <div class="input-field col s12 l5 m6">
+                            <input name="pos" id="pos"  placeholder="Position" type="text" required>
+                            <label for="pos">Position required</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 l5 m6 offset-l1 ">
+                            <input name="location" id="loc" type="text" required>
+                            <label for="loc">Location</label>
+                        </div>
+                        <div class="input-field col s12 l5 m6">
+                            <select class="" name="work">
+                                <option value="" disabled selected>Choose your option</option>
+                                <option value="home">Work from home</option>
+                                <option value="office">Work from Office</option>
+                            </select>
+                            <label>Work from</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 l5 m6 offset-l1 ">
+                            <input name="start" id="start" type="date" required>
+                            <label for="start" class="active">Starting from</label>
+                        </div>
+                        <div class="input-field col s12 l5 m6">
+                            <input name="duration" id="duration" type="Number" placeholder="Months" required>
+                            <label for="duration" class="active">Max. Duration (months)</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 l5 m6 offset-l1 ">
+                            <input name="stipend" id="stipend" type="text" placeholder="Rs. /month" required>
+                            <label for="stipend">Stipend</label>
+                        </div>
+                        <div class="input-field col s12 l5 m6">
+                            <input name="applyby" id="apply" type="date" required>
+                            <label for="apply" class="active">Apply By</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 l10 offset-l1 ">
+                            <textarea name="description" class="materialize-textarea" rows="2" id="desc" placeholder="Write something about the job" required></textarea>
+                            <label for="desc" class="active">Job Description</label>
+                            <p style="text-align: center;margin-top: -13px">OR/AND</p>
+                            <div class="file-field input-field" style="margin-top: -15px">
+                                <div class="btn btn-small">
+                                    <span>Attach PDF</span>
+                                    <input type="file" name="filetoupload" id="fileToUpload" accept=".pdf">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-field col s12 l10 offset-l1">
+                            <textarea name="eligibility" class="materialize-textarea" rows="1" id="eleg" placeholder="Eligibility" required></textarea>
+                            <label for="elig">Who can apply?</label>
+                        </div>
+                    </div>
+                    <div class="row" align="center">
+                        <div class="col s12 l6 m12 offset-l3">
+                            <button type="submit" name="submit2" class="waves-effect waves-light btn">SUBMIT</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
 
