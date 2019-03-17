@@ -67,7 +67,7 @@ if( $query_run = mysqli_query($conn, $query) ){
 		</div>
 		</div>
 		<div class="row" style="margin-bottom: -20px;" align="center">
-		<button class="btn animated" type="submit" name="submit" id="'.$job['id'].'" style="margin-left: 10px; margin-top: 5px;">Apply Now</button>
+		<button class="btn animated" type="submit" name="submit" id="'.$job['id'].'" style="margin-left: 10px; margin-top: 5px;" disabled>Applied</button>
 		</div>
 		</form>'; 
 	}
