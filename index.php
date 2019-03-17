@@ -3,34 +3,7 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-    <title>Opportunities Portal</title>
-    <!-- CSS  -->
-    <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/style1.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/animate.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-</head>
-<style type="text/css">
-body{overflow-x: hidden;}
-.thanks{
-    font-weight: bolder;
-    text-align: center;
-    margin-top: -20px !important;
-}
-.clearfix {
-    overflow: auto;
-}
-</style>
-<body>
-    <div class="navbar-fixed">
-        <nav class="white" role="navigation">
-            <div class="nav-wrapper">
-                <a href="http://www.sac.iitkgp.ac.in/" class="brand-logo left"style="padding-top: 5px;">
+
                     <img src="img/logo.png" width="160px">
                 </a>
                 <ul class="right hide-on-med-and-down">
@@ -93,7 +66,10 @@ body{overflow-x: hidden;}
                                 <p class="text" style="font-size: 100%; padding-bottom: 12px;">Alumni of IIT Kharagpur can now offer freelancing jobs to the alma mater.
                                 </p>
                                 <div class="row" align="center">
-                                    <a class="btn  modal-trigger animated" href="#modal2">Offer a Job</a>
+                                    <a class="btn  modal-trigger animated" href="#modal2">Company Login</a>
+                                </div>
+                                <div class="row" align="center">
+                                    <a class="btn  modal-trigger animated" href="#modal2">Company Register</a>
                                 </div>
                             </div>
                         </div>
@@ -203,78 +179,70 @@ body{overflow-x: hidden;}
             </div>
         </div>
         <div id="modal2" class="modal">
-            <span style="float: right; cursor: pointer;"><i class="material-icons modal-action modal-close">&times</i></span>
             <div class="modal-content">
-                <h4 class="menuheading animated">Enter Job Details</h4>
+                <div class="col l6 s12 offset-l3" style="margin-bottom: 20px;">
+                    <ul class="tabs">
+                        <li class="tab col s3"><a class="active" href="#company_login_form" style="color: #26a69a !important;">Login</a></li>
+                        <li class="tab col s3"><a href="#company_register" style="color: #26a69a !important;">Register</a></li>
+                    </ul>
+                </div>
                 <!--LOGIN FORM-->
-                <form method="POST" action="job.php" enctype="multipart/form-data">
+                <form id="company_login_form" method="POST">
+                    <h4 class="menuheading animated">Login Here</h4>
                     <div class="row">
-                        <div class="input-field col s12 l5 m6 offset-l1 ">
-                            <input name="company" id="company" autofocus placeholder="Company Name" type="text" required>
-                            <label for="company">Company or Organisation</label>
-                        </div>
-                        <div class="input-field col s12 l5 m6">
-                            <input name="pos" id="pos"  placeholder="Position" type="text" required>
-                            <label for="pos">Position required</label>
+                        <div class="input-field col s12 l6 m12 offset-l3 ">
+                            <input name="email" autofocus placeholder = "Company E-mail" type="text" required>
+                            <label for="email">Company E-mail</label>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s12 l5 m6 offset-l1 ">
-                            <input name="location" id="loc" type="text" required>
-                            <label for="loc">Location</label>
-                        </div>
-                        <div class="input-field col s12 l5 m6">
-                            <select class="" name="work">
-                                <option value="" disabled selected>Choose your option</option>
-                                <option value="home">Work from home</option>
-                                <option value="office">Work from Office</option>
-                            </select>
-                            <label>Work from</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12 l5 m6 offset-l1 ">
-                            <input name="start" id="start" type="date" required>
-                            <label for="start" class="active">Starting from</label>
-                        </div>
-                        <div class="input-field col s12 l5 m6">
-                            <input name="duration" id="duration" type="Number" placeholder="Months" required>
-                            <label for="duration" class="active">Max. Duration (months)</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12 l5 m6 offset-l1 ">
-                            <input name="stipend" id="stipend" type="text" placeholder="Rs. /month" required>
-                            <label for="stipend">Stipend</label>
-                        </div>
-                        <div class="input-field col s12 l5 m6">
-                            <input name="applyby" id="apply" type="date" required>
-                            <label for="apply" class="active">Apply By</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12 l10 offset-l1 ">
-                            <textarea name="description" class="materialize-textarea" rows="2" id="desc" placeholder="Write something about the job" required></textarea>
-                            <label for="desc" class="active">Job Description</label>
-                            <p style="text-align: center;margin-top: -13px">OR/AND</p>
-                            <div class="file-field input-field" style="margin-top: -15px">
-                                <div class="btn btn-small">
-                                    <span>Attach PDF</span>
-                                    <input type="file" name="filetoupload" id="fileToUpload" accept=".pdf">
-                                </div>
-                                <div class="file-path-wrapper">
-                                    <input class="file-path validate" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-field col s12 l10 offset-l1">
-                            <textarea name="eligibility" class="materialize-textarea" rows="1" id="eleg" placeholder="Eligibility" required></textarea>
-                            <label for="elig">Who can apply?</label>
+                        <div class="input-field col s12 l6 m12 offset-l3 ">
+                            <input name="password" id="password"  placeholder="Password" type="password" required>
+                            <label for="password">Password</label>
                         </div>
                     </div>
                     <div class="row" align="center">
                         <div class="col s12 l6 m12 offset-l3">
-                            <button type="submit" name="submit2" class="waves-effect waves-light btn">SUBMIT</button>
+                            <button type="submit" id="csubmit" name="csubmit" class="waves-effect waves-light btn">SUBMIT</button>
+                        </div>
+                    </div>
+                </form>
+                <!--LOGIN END FORM-->
+                <!--REGISTER FORM-->
+                <form id="company_register" method="post" onsubmit="return issamec();" action="registercompany.php">
+                    <h4 class="menuheading animated">Register Here</h4>
+                    <div class="row">
+                        <div class="input-field col s12 l5 m6 offset-l1">
+                            <input type="text" name="companyname" id="companyname" placeholder="Company Name" required>
+                            <label for="companyname">Company Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 l5 m6 offset-l1">
+                            <input type="text" name="location" id="location" placeholder="Location" required>
+                            <label for="location">Location</label>
+                        </div>
+                        <div class="input-field col s12 l5 m6">
+                            <input type="email" name="cemail" id="cemail" placeholder="Email Id" required>
+                            <label for="email">Company E-mail</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 l5 m6 offset-l1">
+                            <input type="password" name="create_password" id="createp"  required>
+                            <label for="create">Create Password</label>
+                        </div>
+                        <div class="input-field col s12 l5 m6">
+                            <input type="password" name="confirm_password" id="confirmp"  required>
+                            <label for="confirm">Confirm Password</label>
+                        </div>
+                    </div>
+                    <span class="" style="color: red; margin-top: 0" >
+                        <p id="cpass"></p>
+                    </span>
+                    <div class="row" align="center">
+                        <div class="col s12 l6 m12 offset-l3">
+                            <button type="submit" name="submitc" class="waves-effect waves-light btn">SUBMIT</button>
                         </div>
                     </div>
                 </form>
@@ -287,8 +255,7 @@ body{overflow-x: hidden;}
         <!-- <script src="js/materialize.min.js"></script> -->
         <script src="js/init.js"></script>
         <script type="text/javascript">
-            $(function () {
-                
+
               $('#login_form').on('submit', function (e) {
                 e.preventDefault();
                 $.ajax({
@@ -331,51 +298,7 @@ body{overflow-x: hidden;}
       }
   });
             });
-          });
-      </script>
-      <?php 
-      if(@$_SESSION['posted'] == 1) {
-        echo "<script>
-        swal({
-          title: 'POSTED!',
-          text: 'Your job has been posted.',
-          icon: 'success',
-          buttons: true,
-      });</script>";
-  }
-  unset($_SESSION['posted']);
-  
-  if(@$_SESSION['registered'] == 1) {
-    echo "<script>
-    swal({
-      title: 'ALREADY REGISTERED!',
-      text: '',
-      icon: 'error',
-      buttons: true,
-  });</script>";
-}
 
-elseif (@$_SESSION['registered'] == 2) {
-    echo "<script>
-    swal({
-      title: 'TRY AGAIN',
-      text: 'Connection error',
-      icon: 'error',
-      buttons: true,
-  });</script>";
-}
-unset($_SESSION['registered']);
-?>
-<script>
-    $(document).ready(function(){
-      $(".item , .menuheading").hover(
-        function () {
-          $(this).addClass('pulse');
-      },
-      function () {
-          $(this).removeClass('pulse');
-      }
-      );
               // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
               $('.modal-trigger').leanModal();
           });
@@ -383,27 +306,5 @@ unset($_SESSION['registered']);
     $(document).ready(function(){
       $('select').material_select();
               // $('.datepicker').datepicker();
-          });
-      </script>
-      <script type="text/javascript">
-        function issame() {
-          var create = document.getElementById('create').value;
-          var confirm = document.getElementById('confirm').value;
-          if(create != confirm){
-            document.getElementById('pass').innerHTML = '* Password does not match!';
-            return false;
-        }
-    }
-    $(document).ready(function() {
-      if($(window).width() < 530){
-        $('#image').removeClass('clearfix');
-    }
-    if($(window).width() < 866){
-        $('#img').addClass('col s12');
-        $('#img').attr('align', 'center');
-        $('#pic').css({"float":"none", "margin-top":"0"});
-    }
-});
-</script>
-</body>
+
 </html>
