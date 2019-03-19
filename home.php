@@ -10,7 +10,7 @@ require 'connection.php';
 $query="SELECT * FROM jobs WHERE approval = '1' order by time desc";
 if( $query_run = mysqli_query($conn, $query) ){
 	$jobs = mysqli_fetch_all($query_run, MYSQLI_ASSOC);
-  // print_r($jobs);
+  	//print_r($jobs);
 }
 $q="SELECT job_id FROM jobapplied WHERE rollno = '".$_SESSION['rollno']."'";
 if( $query_run = mysqli_query($conn, $q) ){
@@ -48,10 +48,9 @@ if( $query_run = mysqli_query($conn, $q) ){
 				<a href="http://www.sac.iitkgp.ac.in/" class="brand-logo left"style="padding-left: 10px; padding-top: 5px;"><img src="img/logo.png" width="160px"></a>
 				<ul class="right hide-on-med-and-down">
 					<li><a class="waves-effect waves-light item animated" href="home.php">HOME</a></li>
-					<li><a class="waves-effect waves-light item animated" href="#classgift">PREVIOUS CLASS GIFTS</a></li>
-					<li><a class="waves-effect waves-light item animated" href="#contact">CONTACT</a></li>
 					<li><a class="waves-effect waves-light item animated" href="appliedjobs.php">APPLIED JOBS</a></li>
-				</ul>
+					<li><a class="waves-effect waves-light item animated" href="#contact">CONTACT</a></li>
+					</ul>
 
 				<ul id="nav-mobile" class="side-nav">
 					<li><a href="home.php">HOME</a></li>
