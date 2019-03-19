@@ -20,7 +20,7 @@ $skills = explode(",", $row[11]);
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
 	<title><?php echo $row[1]; ?> | Profile</title>
 	<link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
-	<link href="https://fonts.googleapis.com/icon?family=Material+material-icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link href="css/style1.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link href="css/animate.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -226,14 +226,16 @@ $skills = explode(",", $row[11]);
 		$('.add').on('click', function() {
 			var skill = $('#skill').val();
 			var skills = $('#skills').val();
+			var id = $('.collection li').length + 1;
 			if(skill != '') {
 				if(skills != '')
 					$('#skills').val(skills + ',' + skill);
 				else
 					$('#skills').val(skills + skill);
 
-				$(".collection").append('<li class="collection-item">'+skill+'<i class="material-icons delete">delete</i></li>');
+				$(".collection").append('<li class="collection-item" id="skill"'+id+'>'+skill+'<i class="material-icons delete" id="'+id+'">delete</i></li>');
 			}
+			$('#skill').val("");
 		});
 
 		$('.delete').on('click', function() {
