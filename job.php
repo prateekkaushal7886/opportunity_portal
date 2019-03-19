@@ -59,7 +59,7 @@ if(isset($_POST['submit2'])){
 				if ($conn->query($sql) === TRUE) {
 					$conn->close();
 					$_SESSION['posted'] = 1;
-					header("location: index.php");
+					header("location: companyindex.php");
 				} else {
 					echo "Error: " . $sql . "<br>" . $conn->error;
 				}
@@ -75,13 +75,13 @@ if(isset($_POST['submit2'])){
 				if ($conn->query($sql) === TRUE) {
 					$conn->close();
 					$_SESSION['posted'] = 1;
-					header("location: index.php");
+					header("location: companyindex.php");
 				} else {
 					echo "Error: " . $sql . "<br>" . $conn->error;
 				}
 
 	}
 }
-$conn->close();
+
 
 ?>
