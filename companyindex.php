@@ -45,7 +45,6 @@ if( $query_run = mysqli_query($conn, $query) ){
 				<a href="http://www.sac.iitkgp.ac.in/" class="brand-logo left"style="padding-left: 10px; padding-top: 5px;"><img src="img/logo.png" width="160px"></a>
 				<ul class="right hide-on-med-and-down">
 					<li><a class="waves-effect waves-light item animated" href="companyindex.php">Home</a></li>
-					<li><a class="waves-effect waves-light item animated" href="responses.php">Responses</a></li>
 					<li><a class="waves-effect waves-light item animated" href="#contact">Contact</a></li>
 				</ul>
 
@@ -53,14 +52,11 @@ if( $query_run = mysqli_query($conn, $query) ){
 					<li><a href="companyindex.php">HOME</a></li>
 					<li><a class="waves-effect waves-light"href="#contact">CONTACT</a></li>
 				</ul>
-				<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+				<a href="#" data-activates="nav-mobile" class="button-collapse" style="float: right;"><i class="material-icons">menu</i></a>
 			</div>
 		</nav>
-	</div>
-	<div class="scrollspy" id="what">
-		<p class="menuheading animated">What you can do here ?</p>
-	</div>
-	<div class="scrollspy" id="classgift">
+	</div> 
+	<div class="scrollspy">
         <p class="menuheading animated"></p>
         <div class="container">
             <div class="row">
@@ -117,14 +113,14 @@ if( $query_run = mysqli_query($conn, $query) ){
                 <td>'.$jobs[$i]['stipend'].'</td>
                 <td>'.date("d-m-y", strtotime($jobs[$i]['time'])).'</td>
                 <td>'.$jobs[$i]['applyby'].'</td>
-                <td>'.$data[0].'</td>
+                <td><a href="responses.php?id='.$jobs[$i]['id'].'" class="tooltipped" data-tooltip="Click to see Applicants" data-position="top">'.$data[0].'</a></td>
                 </tr>
                 </tbody>
                 </table>
                 </div>
                 </div>
                 <div class="row" style="margin-bottom: 0;">
-                <a class="btn modal-trigger animated apply_btn" href="#modal" id="'.$jobs[$i]['id'].'" style="margin-left: 10px; margin-top: 5px;">Apply Now</a>
+                <button class="btn modal-trigger animated apply_btn" name="companyJob" href="" id="'.$jobs[$i]['id'].'" style="margin-left: 10px; margin-top: 5px;">See Details</button>
                 </div>
                 </div>
                 </div>
@@ -260,36 +256,37 @@ if( $query_run = mysqli_query($conn, $query) ){
 		});
 	});
 	$(document).ready(function() {
+        $('.tooltipped').tooltip();
 		$('.modal-trigger').leanModal();
         $('select').material_select();
     });
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(document).ready(function() {
 		$('.apply_btn').click(function() {
 			var id = $(this).attr('id');
 			$.ajax({
 				type: 'post',
 				url: 'getdata.php',
-				data: {'id': id},
+				data: {'id': id, 'job': 1},
 				success: function (response) {
 					document.getElementById('job_data').innerHTML = response;
 				}
 			});
 		});
 	});
-</script>
+</script> -->
 <?php
 
 if(@$_SESSION['posted'] == 1) {
-                echo "<script>
-                swal({
-                  title: 'POSTED!',
-                  text: 'Your job has been posted.',
-                  icon: 'success',
-                  buttons: true,
-                });</script>";
-              }
+    echo "<script>
+    swal({
+      title: 'POSTED!',
+      text: 'Your job has been posted.',
+      icon: 'success',
+      buttons: true,
+  });</script>";
+}
 
 $_SESSION['posted'] = 0;
 ?>

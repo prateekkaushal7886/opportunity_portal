@@ -8,10 +8,11 @@ if(!isset($_SESSION['email'])){
 
 <?php
 require 'connection.php';
+$id = $_GET['id'];
 $query="SELECT companyname FROM companies WHERE email = '".$_SESSION['email']."'";
 if( $query_run = mysqli_query($conn, $query) ){
 	$x = mysqli_fetch_all($query_run, MYSQLI_ASSOC);
-   	$company = $x[0]['companyname'];
+	$company = $x[0]['companyname'];
 }
 $query="SELECT id FROM jobs WHERE company = '".$company."'";
 if( $query_run = mysqli_query($conn, $query) ){
@@ -48,17 +49,16 @@ if( $query_run = mysqli_query($conn, $query) ){
 			<div class="nav-wrapper">
 				<a href="http://www.sac.iitkgp.ac.in/" class="brand-logo left"style="padding-left: 10px; padding-top: 5px;"><img src="img/logo.png" width="160px"></a>
 				<ul class="right hide-on-med-and-down">
-					<li><a class="waves-effect waves-light item animated" href="home.php">Home</a></li>
-					<li><a class="waves-effect waves-light item animated" href="">Responses</a></li>
+					<li><a class="waves-effect waves-light item animated" href="companyindex.php">Home</a></li>
 					<li><a class="waves-effect waves-light item animated" href="#contact">Contact</a></li>
 				</ul>
 
 				<ul id="nav-mobile" class="side-nav">
-					<li><a href="home.php">HOME</a></li>
+					<li><a href="companyindex.php">HOME</a></li>
 					<li><a class="waves-effect waves-light"href="#contact">CONTACT</a></li>
 
 				</ul>
-				<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+				<a href="#" data-activates="nav-mobile" class="button-collapse" style="float: right;"><i class="material-icons">menu</i></a>
 			</div>
 		</nav>
 	</div>
@@ -67,48 +67,44 @@ if( $query_run = mysqli_query($conn, $query) ){
 		
 		<?php 
 		
-			foreach ($job_ids as $job_id) {
+		$q="SELECT * FROM jobapplied WHERE job_id = '".$id."'";
+		if( $query_run = mysqli_query($conn, $q) ){
+			$resp = mysqli_fetch_all($query_run, MYSQLI_ASSOC);
 
-				
-				
-				$q="SELECT * FROM jobapplied WHERE job_id = '".$job_id['id']."'";
-				if( $query_run = mysqli_query($conn, $q) ){
-					$resp = mysqli_fetch_all($query_run, MYSQLI_ASSOC);
-					
-					if($resp){
-						foreach ($resp as $student) {
-							
-							$q = "SELECT * FROM students WHERE rollno = '".$student['rollno']."'";
-							if( $query_run = mysqli_query($conn, $q) ){
-								$studentd = mysqli_fetch_all($query_run, MYSQLI_ASSOC);
-								
-								echo '<div class="row" style="margin-bottom: 0px;">
-								<div class="col s10 offset-s1">
-								<div class="card hoverable">
-								<div class="card-content">
-								<span class="menuheading animated" style="font-size: 18px; padding-left: 7px">'.$studentd[0]['firstname']." ".$studentd[0]['lastname'].'</span>
-								<div class="row" style="margin-bottom: 0px;">
-								
-								
-								</div>
-								</div>
-								<div class="row" style="margin-bottom: 0;">
-								<a class="btn modal-trigger animated apply_btn" href="'.$student['cv'].'" target ="_blank" style="margin-left: 10px; margin-top: 5px;">CV</a>
-								</div>
-								</div>
-								</div>
-								</div>
-								</div>';								
-							}
-						}
+			if($resp){
+				echo '<table class="striped responsive-table">
+				<thead>
+				<tr>
+				<th>Name</th>
+				<th>Department</th>
+				<th>LinkedIn</th>
+				<th>Resume</th>
+				</tr>
+				</thead>
+
+				<tbody>';
+				foreach ($resp as $student) {
+
+					$q = "SELECT * FROM students WHERE rollno = '".$student['rollno']."'";
+					if( $query_run = mysqli_query($conn, $q) ){
+						$studentd = mysqli_fetch_all($query_run, MYSQLI_ASSOC);
+
+						echo '
+						<tr>
+						<td>'.$studentd[0]['firstname']." ".$studentd[0]['lastname'].'</td>
+						<td>'.$studentd[0]['department'].'</td>
+						<td>'.$studentd[0]['linkedin'].'</td>
+						<td><a href="'.$student['cv'].'" target ="_blank">Click to see</a></td>
+						</tr>';								
 					}
-					 
 				}
-
 			}
-								
-		
-		
+
+		}
+		echo '
+		</tbody>
+		</table>';
+			// }
 		?>
 		<hr />
 	</div>
