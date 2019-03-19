@@ -32,5 +32,36 @@ if(isset($_POST['submit1'])){
 	}
 	die();	
 }
+if(isset($_POST['update'])){
+	$firstname = $_POST['firstname'];
+	$lastname = $_POST['lastname'];
+	$rollno = $_POST['rollno'];
+	$email = $_POST['email'];
+	$linkedin = $_POST['linkedin'];
+	$joinYear = $_POST['joinYear'];
+	$graduatingYear = $_POST['graduatingYear'];
+	$cg = $_POST['cgpa'];
+	$dept = $_POST['department'];
+	$degree = $_POST['degree'];
+	$skills = $_POST['skills'];
+	$user = "SELECT * FROM students WHERE rollno = '".$_SESSION['rollno']."'";
+	if( $query_run2 = mysqli_query($conn, $user) ){
+		$row = mysqli_fetch_row($query_run2);
+	}
+	$skills = $row[11].','.$skills;
+	$query = "UPDATE `students`
+	SET firstname = '$firstname', lastname = '$lastname', rollno = '$rollno', email = '$email', linkedin = '$linkedin',
+	joinYear = '$joinYear', graduatingYear = '$graduatingYear', cgpa = '$cg', department = '$dept', degree = '$degree', 
+	skills = '$skills'
+	WHERE rollno = ".$_SESSION['rollno']."
+	";
+
+	if ($conn->query($query) === TRUE) {
+		header("location: home.php");
+
+	} else {
+		echo "Error: " . $sql . "<br>" . $conn->error;
+	}
+}
 $conn->close();
 ?>

@@ -21,15 +21,20 @@ if( $query_run = mysqli_query($conn, $q) ){
 			$job_ids[] = $ids['job_id'];
 	}
 }
+$user = "SELECT firstname FROM students WHERE rollno = '".$_SESSION['rollno']."'";
+if( $query_run2 = mysqli_query($conn, $user) ){
+	while($row = mysqli_fetch_row($query_run2)){
+		$name = $row[0];
+	}
+}
 // print_r($job_ids);
 ?>
 
-<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-	<title></title>
+	<title>Applied Jobs</title>
 	<link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -50,18 +55,18 @@ if( $query_run = mysqli_query($conn, $q) ){
 				<a href="http://www.sac.iitkgp.ac.in/" class="brand-logo left"style="padding-left: 10px; padding-top: 5px;"><img src="img/logo.png" width="160px"></a>
 				<ul class="right hide-on-med-and-down">
 					<li><a class="waves-effect waves-light item animated" href="home.php">HOME</a></li>
-					<li><a class="waves-effect waves-light item animated" href="#classgift">PREVIOUS CLASS GIFTS</a></li>
-					<li><a class="waves-effect waves-light item animated" href="#contact">CONTACT</a></li>
 					<li><a class="waves-effect waves-light item animated" href="appliedjobs.php">APPLIED JOBS</a></li>
+					<li><a class="waves-effect waves-light item animated" href="#contact">CONTACT</a></li>
+					<li><a class="waves-effect waves-light item animated" href="profile.php" style="text-transform: uppercase;"><?php echo $name; ?></a></li>
 				</ul>
 
 				<ul id="nav-mobile" class="side-nav">
+					<li><a class="waves-effect waves-light item animated" href="profile.php" style="text-transform: uppercase;"><?php echo $name; ?></a></li><hr>
 					<li><a href="home.php">HOME</a></li>
-					<li><a href="#classgift">PREVIOUS CLASS GIFTS</a></li>
+					<li><a href="appliedjobs.php">APPLIED JOBS</a></li>
 					<li><a class="waves-effect waves-light"href="#contact">CONTACT</a></li>
-
 				</ul>
-				<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+				<a href="#" data-activates="nav-mobile" class="button-collapse" style="float: right;"><i class="material-icons">menu</i></a>
 			</div>
 		</nav>
 	</div>
