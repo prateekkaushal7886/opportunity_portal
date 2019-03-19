@@ -3,7 +3,37 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>Opportunities Portal</title>
+    <!-- CSS  -->
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/style1.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/animate.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript"sr="a href"http://platform.linkedin.com/in.js"></a>
+    api_key: your_api_key_goes_here
+</script>
+</head>
+<style type="text/css">
+body{overflow-x: hidden;}
+.thanks{
+    font-weight: bolder;
+    text-align: center;
+    margin-top: -20px !important;
+}
+.clearfix {
+    overflow: auto;
+}
+</style>
+<body>
+    <div class="navbar-fixed">
+        <nav class="white" role="navigation">
+            <div class="nav-wrapper">
+                <a href="http://www.sac.iitkgp.ac.in/" class="brand-logo left"style="padding-top: 5px;">
                     <img src="img/logo.png" width="160px">
                 </a>
                 <ul class="right hide-on-med-and-down">
@@ -256,55 +286,176 @@ session_start();
         <script src="js/init.js"></script>
         <script type="text/javascript">
 
-              $('#login_form').on('submit', function (e) {
-                e.preventDefault();
-                $.ajax({
-                  type: 'post',
-                  url: 'login.php',
-                  data: $('#login_form').serialize(),
-                  success: function (response) {
-                     if(response == 0 )
-                     {
-                        swal({
-                          title: "INCOMPLETE DETAILS!",
-                          text: "Please enter rollno and password!",
-                          icon: "error",
-                          buttons: true,
-                          dangerMode: true,
-                      }).then((value) => {
-                        
-                      });
-                  }
-                  else if(response == 1 )
-                  {
+          $('#login_form').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+              type: 'post',
+              url: 'login.php',
+              data: $('#login_form').serialize(),
+              success: function (response) {
+               if(response == 0 )
+               {
+                swal({
+                  title: "INCOMPLETE DETAILS!",
+                  text: "Please enter rollno and password!",
+                  icon: "error",
+                  buttons: true,
+                  dangerMode: true,
+              }).then((value) => {
+
+              });
+          }
+          else if(response == 1 )
+          {
+            swal({
+              title: "INVALID LOGIN!",
+              text: "Please re-enter your rollno and password!",
+              icon: "error",
+              buttons: true,
+              dangerMode: true,
+          }).then((value) => {
+
+          });
+      }
+      else if(response == 2 )
+      {
+       window.location="home.php";
+   }
+   else
+   {
+     alert(response);
+ }
+}
+});
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {            
+          $('#company_login_form').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+              type: 'post',
+              url: 'companylogin.php',
+              data: $('#company_login_form').serialize(),
+              success: function (response) {
+                 if(response == 0 )
+                 {
                     swal({
-                      title: "INVALID LOGIN!",
-                      text: "Please re-enter your rollno and password!",
+                      title: "INCOMPLETE DETAILS!",
+                      text: "Please enter Email and password!",
                       icon: "error",
                       buttons: true,
                       dangerMode: true,
                   }).then((value) => {
-                    
+
                   });
               }
-              else if(response == 2 )
+              else if(response == 1 )
               {
-                 window.location="home.php";
-             }
-             else
-             {
-              alert(response);
-          }
-      }
-  });
-            });
+                swal({
+                  title: "INVALID LOGIN!",
+                  text: "Please re-enter your Email and password!",
+                  icon: "error",
+                  buttons: true,
+                  dangerMode: true,
+              }).then((value) => {
 
+              });
+          }
+          else if(response == 2 )
+          {
+             window.location="companyindex.php";
+         }
+         else
+         {
+          alert(response);
+      }
+  }
+});
+        });
+      });
+  </script>
+  <?php 
+  if(@$_SESSION['posted'] == 1) {
+    echo "<script>
+    swal({
+      title: 'POSTED!',
+      text: 'Your job has been posted.',
+      icon: 'success',
+      buttons: true,
+  });</script>";
+}
+unset($_SESSION['posted']);
+
+if(@$_SESSION['registered'] == 1) {
+    echo "<script>
+    swal({
+      title: 'ALREADY REGISTERED!',
+      text: '',
+      icon: 'error',
+      buttons: true,
+  });</script>";
+}
+
+elseif (@$_SESSION['registered'] == 2) {
+    echo "<script>
+    swal({
+      title: 'TRY AGAIN',
+      text: 'Connection error',
+      icon: 'error',
+      buttons: true,
+  });</script>";
+}
+unset($_SESSION['registered']);
+?>
+<script>
+    $(document).ready(function(){
+      $(".item , .menuheading").hover(
+        function () {
+          $(this).addClass('pulse');
+      },
+      function () {
+          $(this).removeClass('pulse');
+      }
+      );
               // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
               $('.modal-trigger').leanModal();
           });
-    
+
     $(document).ready(function(){
       $('select').material_select();
               // $('.datepicker').datepicker();
-
+          });
+      </script>
+      <script type="text/javascript">
+        function issame() {
+          var create = document.getElementById('create').value;
+          var confirm = document.getElementById('confirm').value;
+          if(create != confirm){
+            document.getElementById('pass').innerHTML = '* Password does not match!';
+            return false;
+        }
+    }
+    $(document).ready(function() {
+      if($(window).width() < 530){
+        $('#image').removeClass('clearfix');
+    }
+    if($(window).width() < 866){
+        $('#img').addClass('col s12');
+        $('#img').attr('align', 'center');
+        $('#pic').css({"float":"none", "margin-top":"0"});
+    }
+});
+</script>
+<script type="text/javascript">
+    function issamec() {
+      var createp = document.getElementById('createp').value;
+      var confirmp = document.getElementById('confirmp').value;
+      if(createp != confirmp){
+        document.getElementById('cpass').innerHTML = '* Password does not match!';
+        return false;
+    }
+}
+</script>
+</body>
 </html>

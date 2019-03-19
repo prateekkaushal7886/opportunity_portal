@@ -44,16 +44,15 @@ if(isset($_POST['update'])){
 	$dept = $_POST['department'];
 	$degree = $_POST['degree'];
 	$skills = $_POST['skills'];
-	$i = 1;
-	for ($i=1; $i < $skills; $i++) { 
-		$skill .= $_POST['skill'.$i].',';
+	$user = "SELECT * FROM students WHERE rollno = '".$_SESSION['rollno']."'";
+	if( $query_run2 = mysqli_query($conn, $user) ){
+		$row = mysqli_fetch_row($query_run2);
 	}
-	if ($i == $skills)
-		$skill .= $_POST['skill'.$i];
+	$skills = $row[11].','.$skills;
 	$query = "UPDATE `students`
 	SET firstname = '$firstname', lastname = '$lastname', rollno = '$rollno', email = '$email', linkedin = '$linkedin',
 	joinYear = '$joinYear', graduatingYear = '$graduatingYear', cgpa = '$cg', department = '$dept', degree = '$degree', 
-	skills = '$skill'
+	skills = '$skills'
 	WHERE rollno = ".$_SESSION['rollno']."
 	";
 
