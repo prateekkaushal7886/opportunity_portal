@@ -14,10 +14,10 @@ if( $query_run = mysqli_query($conn, $query) ){
 	$x = mysqli_fetch_all($query_run, MYSQLI_ASSOC);
 	$company = $x[0]['companyname'];
 }
-$query="SELECT id FROM jobs WHERE company = '".$company."'";
+$query="SELECT * FROM jobs WHERE id = '".$id."' && approval = '1' && company = '".$company."'";
 if( $query_run = mysqli_query($conn, $query) ){
-	$job_ids = mysqli_fetch_all($query_run, MYSQLI_ASSOC);
-    //print_r($job_ids);
+	$job = mysqli_fetch_assoc($query_run);
+    // print_r($job);
 }
 
 ?>
@@ -67,6 +67,19 @@ if( $query_run = mysqli_query($conn, $query) ){
 		
 		<?php 
 		
+		echo '<div class="s12">
+		<h6 style="font-weight: bold">Position Required:</h6>
+		<p style="font-size: 100%; margin-top: 0">'.$job['position'].'</p>
+		<h6 style="font-weight: bold">Job Description:</h6>';
+		if($job['descriptionPdf'])
+			echo '<a href = "'.$job['descriptionPdf'].'" target = "_blank">See the attached file!</a>';
+		else
+			echo "";
+		echo '<p style="font-size: 100%; margin-top: 0">'.$job['description'].'</p>
+		<h6 style="font-weight: bold">Who can apply?</h6>
+		<p style="font-size: 100%; margin-top: 0">'.$job['eligibility'].'</p
+		</div>';
+
 		$q="SELECT * FROM jobapplied WHERE job_id = '".$id."'";
 		if( $query_run = mysqli_query($conn, $q) ){
 			$resp = mysqli_fetch_all($query_run, MYSQLI_ASSOC);
