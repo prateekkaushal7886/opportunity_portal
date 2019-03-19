@@ -101,7 +101,6 @@ if( $query_run2 = mysqli_query($conn, $user) ){
 					<th>Apply By</th>
 					</tr>
 					</thead>
-
 					<tbody>
 					<tr>
 					<td>'.date("d-m-y", strtotime($jobs[$i]['start'])).'</td>

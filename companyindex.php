@@ -45,7 +45,7 @@ if( $query_run = mysqli_query($conn, $query) ){
 				<a href="http://www.sac.iitkgp.ac.in/" class="brand-logo left"style="padding-left: 10px; padding-top: 5px;"><img src="img/logo.png" width="160px"></a>
 				<ul class="right hide-on-med-and-down">
 					<li><a class="waves-effect waves-light item animated" href="companyindex.php">Home</a></li>
-					<li><a class="waves-effect waves-light item animated" href="">Responses</a></li>
+					<li><a class="waves-effect waves-light item animated" href="responses.php">Responses</a></li>
 					<li><a class="waves-effect waves-light item animated" href="#contact">Contact</a></li>
 				</ul>
 
@@ -279,3 +279,17 @@ if( $query_run = mysqli_query($conn, $query) ){
 		});
 	});
 </script>
+<?php
+
+if(@$_SESSION['posted'] == 1) {
+                echo "<script>
+                swal({
+                  title: 'POSTED!',
+                  text: 'Your job has been posted.',
+                  icon: 'success',
+                  buttons: true,
+                });</script>";
+              }
+
+$_SESSION['posted'] = 0;
+?>
