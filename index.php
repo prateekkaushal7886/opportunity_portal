@@ -254,17 +254,17 @@ body{overflow-x: hidden;}
                         </div>
                         <div class="input-field col s12 l5 m6">
                             <input type="email" name="cemail" id="cemail" placeholder="Email Id" required>
-                            <label for="email">Company E-mail</label>
+                            <label for="cemail">Company E-mail</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12 l5 m6 offset-l1">
-                            <input type="password" name="create_password" id="createp"  required>
-                            <label for="create">Create Password</label>
+                            <input type="password" name="create_password" id="createp" required>
+                            <label for="createp">Create Password</label>
                         </div>
                         <div class="input-field col s12 l5 m6">
-                            <input type="password" name="confirm_password" id="confirmp"  required>
-                            <label for="confirm">Confirm Password</label>
+                            <input type="password" name="confirm_password" id="confirmp" required>
+                            <label for="confirmp">Confirm Password</label>
                         </div>
                     </div>
                     <span class="" style="color: red; margin-top: 0" >
